@@ -1,16 +1,19 @@
 class Question
-  attr_accessor :num1, :num2, :ans, :correct_ans
-  def initialize()
+  attr_accessor :num1, :num2, :ans, :correct_ans, :player, :score
+
+  def initialize(player)
+    @player = player
     @num1 = 0
     @num2 = 0
     @ans  = 0
     @correct_ans = 0
+    @score = false
   end
   
   def ask
     @num1 = rand(1..20)
     @num2 = rand(1..20)
-    question = "What does #{num1} plus #{num2} equal?"
+    question = "Player #{@player}: What does #{@num1} plus #{@num2} equal?"
     puts question
   end
 
@@ -18,13 +21,12 @@ class Question
     @correct_ans =  @num1 + @num2
     @ans = gets.chomp
     if (@correct_ans == @ans.to_i)
-      puts "YES! You are correct."
+      puts "Player #{@player}: YES! You are correct."
+      @score = true
     else
-      puts "Seriously? No!"
+      puts "Player #{@player}: Seriously? No!"
     end
   end
 end
 
-sparky = Question.new
-sparky.ask
-sparky.ans
+
